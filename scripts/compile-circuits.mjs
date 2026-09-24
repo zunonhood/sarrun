@@ -17,8 +17,7 @@ if (stampedHash.trim() === sourceHash && outputsExist.every(Boolean)) {
   process.exit(0)
 }
 const circom = path.join(root, 'node_modules', 'circom2', 'cli.js')
-const includePath = path.relative(circuits, path.join(root, 'node_modules'))
-execFileSync(process.execPath, [circom, 'JoinSplit.circom', '--r1cs', '--wasm', '--sym', '-l', includePath], { cwd: circuits, stdio: 'inherit' })
+execFileSync(process.execPath, [circom, path.join('circuits', 'JoinSplit.circom'), '--r1cs', '--wasm', '--sym', '-l', 'node_modules', '-o', 'circuits'], { cwd: root, stdio: 'inherit' })
 await Promise.all([
   copyFile(path.join(circuits, 'JoinSplit.r1cs'), outputs[0]),
   copyFile(path.join(circuits, 'JoinSplit.sym'), outputs[1]),
