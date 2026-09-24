@@ -1,0 +1,34 @@
+{
+  "chainId": 4663,
+  "network": "Robinhood Chain",
+  "rpcUrl": "https://rpc.mainnet.chain.robinhood.com",
+  "explorerUrl": "https://robinhoodchain.blockscout.com",
+  "deploymentBlock": null,
+  "contracts": {
+    "poseidonT3": null,
+    "poseidonT6": null,
+    "joinSplitVerifier": null,
+    "shieldedPool": null
+  },
+  "artifacts": {
+    "joinSplitWasm": null,
+    "joinSplitZkey": null,
+    "verificationKey": null
+  },
+  "ceremony": null,
+  "artifactHashes": {
+    "joinSplitWasm": null,
+    "joinSplitZkey": null,
+    "verificationKey": null
+  },
+  "audits": [],
+  "release": {
+    "sourceCommit": null
+  },
+  "runtimeCodeHashes": {
+    "poseidonT3": null,
+    "poseidonT6": null,
+    "joinSplitVerifier": null,
+    "shieldedPool": null
+  }
+}

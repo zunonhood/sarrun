@@ -1,0 +1,48 @@
+{
+    "name": "sarrun-web",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --host 0.0.0.0",
+        "build": "vite build",
+        "preview": "vite preview --host 0.0.0.0",
+        "contracts:compile": "hardhat compile",
+        "contracts:test": "hardhat test",
+        "circuits:compile": "node scripts/compile-circuits.mjs",
+        "sdk:test": "node --test test/sdk/*.test.mjs",
+        "protocol:test": "npm run protocol:prepare-local && npm run contracts:test && npm run sdk:test && npm run circuits:test",
+        "protocol:build": "npm run circuits:compile && npm run contracts:compile && npm run build",
+        "circuits:test": "node --test test/circuits/*.test.mjs",
+        "deploy:robinhood": "hardhat run scripts/deploy-pool.cjs --network robinhood",
+        "release:prepare": "node scripts/prepare-production-release.mjs",
+        "release:predeploy": "node scripts/release-check.mjs --predeploy",
+        "release:check": "node scripts/release-check.mjs",
+        "verify:robinhood": "hardhat run scripts/verify-deployment.cjs --network robinhood",
+        "protocol:prepare-local": "npm run circuits:compile && node scripts/setup-local-proving.mjs"
+    },
+    "dependencies": {
+        "@noble/curves": "^1.2.0",
+        "@vitejs/plugin-react": "latest",
+        "ethers": "^6.13.4",
+        "lucide-react": "latest",
+        "poseidon-lite": "^0.3.0",
+        "react": "latest",
+        "react-dom": "latest",
+        "snarkjs": "^0.7.6",
+        "vite": "latest"
+    },
+    "devDependencies": {
+        "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+        "@openzeppelin/contracts": "^5.1.0",
+        "circom2": "^0.2.23",
+        "circomlib": "^2.0.5",
+        "circomlibjs": "^0.1.7",
+        "hardhat": "^2.28.6",
+        "playwright-core": "^1.63.0",
+        "sharp": "^0.35.4"
+    },
+    "overrides": {
+        "underscore": "1.13.8"
+    }
+}

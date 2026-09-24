@@ -1,0 +1,11 @@
+import { chromium } from 'playwright-core'
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'})
+const desktop=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1})
+await desktop.goto('http://127.0.0.1:4174/',{waitUntil:'networkidle'})
+for(const [name,selector] of [['hero','.hero'],['product','.product-section'],['flow','.flow-section'],['map','.map-section'],['security','.security-section'],['token','.token-section'],['developers','.developer-section'],['faq','.faq-section']]) await desktop.locator(selector).screenshot({path:`qa-review-${name}.png`})
+const mobile=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1})
+await mobile.goto('http://127.0.0.1:4174/',{waitUntil:'networkidle'})
+await mobile.locator('.hero').screenshot({path:'qa-review-hero-mobile.png'})
+console.log(await desktop.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth})))
+console.log(await mobile.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth})))
+await browser.close()

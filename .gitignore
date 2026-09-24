@@ -1,0 +1,40 @@
+node_modules/
+dist/
+artifacts/
+cache/
+coverage/
+.env
+.env.*
+!.env.example
+
+# Local proving and trusted-setup artifacts
+*.ptau
+*.zkey
+*.wtns
+circuits/build/
+circuits/JoinSplit.r1cs
+circuits/JoinSplit.sym
+circuits/JoinSplit_js/
+
+# Browser QA profiles and generated captures
+.chrome-*/
+.edge-*/
+/*.png
+qa-*.png
+
+# One-time migration helpers (not reproducible project inputs)
+scripts/add-*.mjs
+scripts/fix-*.mjs
+scripts/harden-*.mjs
+scripts/update-production-docs.mjs
+scripts/verify-browser-artifacts.mjs
+scripts/replace-app-shell.mjs
+scripts/app-shell.next.jsx
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+scripts/prepare-github-pages.mjs
+scripts/configure-reproducible-tests.mjs
