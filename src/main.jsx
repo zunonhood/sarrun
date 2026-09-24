@@ -69,7 +69,7 @@ function Header({ openApp }) {
         <a className="header-github" href={`${BASE}docs.html#repository`} aria-label="Browse protocol source"><GithubBrand /></a>
         <a className="header-fomo" href="https://fomo.family" target="_blank" rel="noreferrer" aria-label="Open Fomo"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
         <a className="header-x" href="https://x.com/sarruncash" target="_blank" rel="noreferrer" aria-label="Follow Sarrun on X"><XBrand /></a>
-        <a className="primary-btn light token-buy" href="https://www.ponsfamily.com/launchpad/0x398c4728EbF5E4f6083E24862463a508BFbb50cB" target="_blank" rel="noreferrer">Buy SARRUN <ArrowRight /></a>
+        <a className="primary-btn light token-buy" href="https://www.ponsfamily.com/launchpad" target="_blank" rel="noreferrer">Buy SARRUN <ArrowRight /></a>
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label="Menu">{menu ? <X /> : <Menu />}</button>
       </div>
     </header>
@@ -223,7 +223,7 @@ function TokenSection() {
       <div className="token-console">
         <button className="token-ca" onClick={copyCA} type="button" aria-label="Copy the official Sarrun contract address"><span>VERIFIED CONTRACT ADDRESS</span><strong>{TOKEN_CA}</strong><small>Robinhood Chain · {copied ? 'COPIED TO CLIPBOARD' : 'CLICK TO COPY'}</small><Copy /></button>
         <div className="token-links">
-          <a href="https://www.ponsfamily.com/launchpad/0x398c4728EbF5E4f6083E24862463a508BFbb50cB" target="_blank" rel="noreferrer"><span>PONS</span><b>Launchpad</b><ArrowUpRight /></a>
+          <a href="https://www.ponsfamily.com/launchpad" target="_blank" rel="noreferrer"><span>PONS</span><b>Launchpad</b><ArrowUpRight /></a>
           <a href="https://fomo.family" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trading app</b><ArrowUpRight /></a>
         </div>
         <p><Lock /> Always verify the full contract address before buying or trading SARRUN.</p>
