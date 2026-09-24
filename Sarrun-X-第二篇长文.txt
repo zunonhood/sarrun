@@ -1,4 +1,4 @@
-﻿Sarrun：我们不想在 Robinhood Chain 上复制一个 Tornado Cash
+Sarrun：我们不想在 Robinhood Chain 上复制一个 Tornado Cash
 
 这是 Sarrun 的第二次发声。
 
@@ -257,4 +257,4 @@ Non-custodial privacy infrastructure for Robinhood Chain.
 
 Official X: https://x.com/sarruncash
 Documentation: [上线后填写正式 Docs 地址]
-Contract: 当前没有已发布的官方 CA。任何未同时出现在官网与 @sarruncash 的地址都不是 Sarrun 官方地址。
+Contract: 0x398c4728EbF5E4f6083E24862463a508BFbb50cB。请始终同时通过官网与 @sarruncash 核对完整地址。

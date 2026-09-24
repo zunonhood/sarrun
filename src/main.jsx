@@ -10,6 +10,7 @@ import { createPaymentAddress, downloadRecoveryRecord, exitPrivate, getProtocolC
 
 const PROTOCOL = getProtocolConfig()
 const BASE = import.meta.env.BASE_URL
+const TOKEN_CA = '0x398c4728EbF5E4f6083E24862463a508BFbb50cB'
 
 const CHAIN = {
   chainId: '0x1237',
@@ -25,7 +26,7 @@ const faqs = [
   ['Who controls my assets?', 'You do. One-time spending secrets are created on the user device. Sarrun never asks for a wallet seed phrase.'],
   ['How is value protected?', 'Every deposit is bound to its ETH value in the note commitment. Every private transition proves ownership, Merkle membership, value conservation and unused nullifiers.'],
   ['Which network does Sarrun use?', 'Sarrun targets Robinhood Chain mainnet, chain ID 4663, with ETH as the native settlement asset and gas token.'],
-  ['Is there a Sarrun token?', 'No verified contract address is currently published. A valid CA must appear here and on @sarruncash before it should be treated as official.'],
+  ['What is the official Sarrun token address?', 'The official contract address is 0x398c4728EbF5E4f6083E24862463a508BFbb50cB. Always verify the full address on this website before using a launchpad or trading app.'],
   ['Is privacy absolute?', 'No. Sarrun hides the internal note graph, but timing, amounts, RPC metadata, public entry and public exit can still create correlations.'],
 ]
 function Logo({ dark = false, markOnly = false }) {
@@ -68,7 +69,7 @@ function Header({ openApp }) {
         <a className="header-github" href={`${BASE}docs.html#repository`} aria-label="Browse protocol source"><GithubBrand /></a>
         <a className="header-fomo" href="https://fomo.family" target="_blank" rel="noreferrer" aria-label="Open Fomo"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
         <a className="header-x" href="https://x.com/sarruncash" target="_blank" rel="noreferrer" aria-label="Follow Sarrun on X"><XBrand /></a>
-        <a className="primary-btn light token-buy" href="#token">Token status <ArrowRight /></a>
+        <a className="primary-btn light token-buy" href="https://www.ponsfamily.com/launchpad" target="_blank" rel="noreferrer">Buy SARRUN <ArrowRight /></a>
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label="Menu">{menu ? <X /> : <Menu />}</button>
       </div>
     </header>
@@ -206,20 +207,26 @@ function SecuritySection() {
 
 
 function TokenSection() {
+  const [copied, setCopied] = useState(false)
+  const copyCA = async () => {
+    await navigator.clipboard.writeText(TOKEN_CA)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1800)
+  }
   return (
     <section className="token-section" id="token">
       <div className="token-copy">
         <span className="eyebrow">SARRUN TOKEN</span>
-        <h2>No CA.<br /><em>No guessing.</em></h2>
-        <p>Sarrun has not launched a token. Until the verified contract address appears here and on <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">@sarruncash</a>, assume every token using our name is unrelated.</p>
+        <h2>One CA.<br /><em>Verify it.</em></h2>
+        <p>This is the official Sarrun contract address. Match every character here and on <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">@sarruncash</a> before interacting with any launchpad or trading app.</p>
       </div>
       <div className="token-console">
-        <div className="token-ca"><span>VERIFIED CONTRACT ADDRESS</span><strong>NOT PUBLISHED</strong><small>Robinhood Chain · CA will be announced here</small></div>
+        <button className="token-ca" onClick={copyCA} type="button" aria-label="Copy the official Sarrun contract address"><span>VERIFIED CONTRACT ADDRESS</span><strong>{TOKEN_CA}</strong><small>Robinhood Chain · {copied ? 'COPIED TO CLIPBOARD' : 'CLICK TO COPY'}</small><Copy /></button>
         <div className="token-links">
           <a href="https://www.ponsfamily.com/launchpad" target="_blank" rel="noreferrer"><span>PONS</span><b>Launchpad</b><ArrowUpRight /></a>
           <a href="https://fomo.family" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trading app</b><ArrowUpRight /></a>
         </div>
-        <p><Lock /> These are platform homepages, not Sarrun trading pairs. Token-specific links will only activate after an official launch.</p>
+        <p><Lock /> Always verify the full contract address before buying or trading SARRUN.</p>
       </div>
     </section>
   )
