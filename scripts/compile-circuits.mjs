@@ -1,5 +1,5 @@
 import { mkdir, copyFile, readFile, writeFile } from 'node:fs/promises'
-import { execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import path from 'node:path'
 const root = process.cwd()
@@ -16,8 +16,8 @@ if (stampedHash.trim() === sourceHash && outputsExist.every(Boolean)) {
   console.log('Circuit build is current.')
   process.exit(0)
 }
-const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx'
-execSync(`${npx} circom2 JoinSplit.circom --r1cs --wasm --sym -l ..\\node_modules`, { cwd: circuits, stdio: 'inherit' })
+const circom = path.join(root, 'node_modules', 'circom2', 'cli.js')
+execFileSync(process.execPath, [circom, 'JoinSplit.circom', '--r1cs', '--wasm', '--sym', '-l', path.join(root, 'node_modules')], { cwd: circuits, stdio: 'inherit' })
 await Promise.all([
   copyFile(path.join(circuits, 'JoinSplit.r1cs'), outputs[0]),
   copyFile(path.join(circuits, 'JoinSplit.sym'), outputs[1]),
