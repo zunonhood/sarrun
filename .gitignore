@@ -36,5 +36,6 @@ scripts/app-shell.next.jsx
 Thumbs.db
 .vscode/
 .idea/
+.tmp-ci-*
 scripts/prepare-github-pages.mjs
 scripts/configure-reproducible-tests.mjs
