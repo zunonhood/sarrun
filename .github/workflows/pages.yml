@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -27,7 +29,19 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Detect protocol changes
+        id: protocol
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" != "push" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          elif git diff --quiet "${{ github.event.before }}" "$GITHUB_SHA" -- contracts circuits deployments scripts test hardhat.config.cjs package.json package-lock.json src/protocol.js; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Test protocol
+        if: steps.protocol.outputs.run == 'true'
         run: npm run protocol:test
       - name: Build site
         run: npm run build
