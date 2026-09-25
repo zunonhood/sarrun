@@ -77,7 +77,7 @@ function Header({ openApp }) {
       <div className="header-end">
         <a className="chain-pill" href={CHAIN.blockExplorerUrls[0]} target="_blank" rel="noreferrer"><i />Solana</a>
         <a className="header-github" href={`${BASE}docs.html#repository`} aria-label="Browse protocol source"><GithubBrand /></a>
-        <a className="header-fomo" href="https://fomo.family" target="_blank" rel="noreferrer" aria-label="Open Fomo trading app"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
+        <a className="header-fomo" href="https://fomo.family/tokens/solana/34qEQSHDbTdtvspTwvTKAjiX7ynfqjX7gVKA7chWpump" target="_blank" rel="noreferrer" aria-label="Trade Murven on Fomo"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
         <a className="header-x" href="https://x.com/murvendotfun" target="_blank" rel="noreferrer" aria-label="Follow Murven on X"><XBrand /></a>
         <a className="primary-btn light token-buy" href={TOKEN.buyUrl} target="_blank" rel="noreferrer">{TOKEN_IS_LIVE ? `Buy $${TOKEN.symbol}` : 'Launch on Pump.fun'} <ArrowRight /></a>
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label="Menu">{menu ? <X /> : <Menu />}</button>
@@ -228,7 +228,7 @@ function TokenSection() {
         <div className="token-ca"><span>VERIFIED MINT ADDRESS</span><strong className={TOKEN_IS_LIVE ? 'is-address' : ''}>{TOKEN.mintAddress || 'NOT PUBLISHED'}</strong><small>Solana · {TOKEN_IS_LIVE ? 'Official Murven mint' : 'Mint address will be announced here'}</small></div>
         <div className="token-links">
           <a href={TOKEN.buyUrl} target="_blank" rel="noreferrer"><span>PUMP.FUN</span><b>{TOKEN_IS_LIVE ? `Buy $${TOKEN.symbol}` : 'Launchpad'}</b><ArrowUpRight /></a>
-          <a href="https://fomo.family" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trading app</b><ArrowUpRight /></a>
+          <a href="https://fomo.family/tokens/solana/34qEQSHDbTdtvspTwvTKAjiX7ynfqjX7gVKA7chWpump" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trade $MURVEN</b><ArrowUpRight /></a>
         </div>
         <p><Lock /> {TOKEN_IS_LIVE ? 'Verify this mint against the official Murven X account before trading.' : 'These are platform homepages, not MURVEN trading pairs. Token-specific links will only activate after the verified mint is published here and on the official Murven X account.'}</p>
       </div>
