@@ -57,6 +57,7 @@ footer{background:var(--black);color:white;padding:65px var(--gutter) 28px}.foot
 .token-console{background:var(--cream);border:2px solid var(--ink);border-radius:28px;padding:25px;box-shadow:8px 9px 0 var(--ink)}
 .token-ca{min-height:148px;border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:center}
 .token-ca strong{font-size:clamp(27px,3vw,42px);letter-spacing:-.045em;margin:9px 0}
+.token-ca strong.is-address{font:700 clamp(12px,1.6vw,20px)/1.35 'DM Mono',monospace;letter-spacing:-.025em;overflow-wrap:anywhere}
 .token-ca small{font:8px 'DM Mono',monospace;color:#777a71}
 .token-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .token-links a{min-height:94px;border:2px solid var(--ink);border-radius:18px;padding:17px;display:grid;grid-template-columns:1fr auto;align-content:center;background:white;transition:transform .2s,box-shadow .2s}

@@ -25,8 +25,8 @@ const CHAIN = {
 
 const TOKEN = {
   symbol: 'MURVEN',
-  mintAddress: null,
-  buyUrl: 'https://pump.fun/',
+  mintAddress: '34qEQSHDbTdtvspTwvTKAjiX7ynfqjX7gVKA7chWpump',
+  buyUrl: 'https://pump.fun/coin/34qEQSHDbTdtvspTwvTKAjiX7ynfqjX7gVKA7chWpump',
 }
 const TOKEN_IS_LIVE = Boolean(TOKEN.mintAddress && TOKEN.buyUrl)
 
@@ -36,7 +36,7 @@ const faqs = [
   ['Who controls my assets?', 'You do. One-time spending secrets are created on the user device. Murven never asks for a wallet seed phrase.'],
   ['How is value protected?', 'Every deposit is bound to its SOL value in the note commitment. Every private transition proves ownership, Merkle membership, value conservation and unused nullifiers.'],
   ['Which network does Murven use?', 'Murven targets Solana mainnet, mainnet-beta, with SOL as the native settlement asset and gas token.'],
-  ['Is there a Murven token?', 'No verified Solana mint address is currently published. It must appear here and on the official Murven X account before it should be treated as official.'],
+  ['Is there a Murven token?', 'Yes. Murven Coin is live on Pump.fun. Always verify the mint address shown in the token section before trading.'],
   ['Is privacy absolute?', 'No. Murven hides the internal note graph, but timing, amounts, RPC metadata, public entry and public exit can still create correlations.'],
 ]
 function Logo({ dark = false, markOnly = false }) {
@@ -78,7 +78,7 @@ function Header({ openApp }) {
         <a className="chain-pill" href={CHAIN.blockExplorerUrls[0]} target="_blank" rel="noreferrer"><i />Solana</a>
         <a className="header-github" href={`${BASE}docs.html#repository`} aria-label="Browse protocol source"><GithubBrand /></a>
         <a className="header-fomo" href="https://fomo.family" target="_blank" rel="noreferrer" aria-label="Open Fomo trading app"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
-        <a className="header-x" href="https://x.com/sarruncash" target="_blank" rel="noreferrer" aria-label="Follow Murven on X"><XBrand /></a>
+        <a className="header-x" href="https://x.com/murvendotfun" target="_blank" rel="noreferrer" aria-label="Follow Murven on X"><XBrand /></a>
         <a className="primary-btn light token-buy" href={TOKEN.buyUrl} target="_blank" rel="noreferrer">{TOKEN_IS_LIVE ? `Buy $${TOKEN.symbol}` : 'Launch on Pump.fun'} <ArrowRight /></a>
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label="Menu">{menu ? <X /> : <Menu />}</button>
       </div>
@@ -221,11 +221,11 @@ function TokenSection() {
     <section className="token-section" id="token">
       <div className="token-copy">
         <span className="eyebrow">MURVEN TOKEN</span>
-        <h2>Pump.fun launch.<br /><em>One official mint.</em></h2>
-        <p>MURVEN will launch on Pump.fun. Until the verified mint address appears here and on the <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">official Murven X account</a>, assume every token using our name is unrelated.</p>
+        <h2>Live on Pump.fun.<br /><em>One official mint.</em></h2>
+        <p>MURVEN is live on Pump.fun. Verify the mint address below and confirm it against the <a href="https://x.com/murvendotfun" target="_blank" rel="noreferrer">official Murven X account</a> before trading.</p>
       </div>
       <div className="token-console">
-        <div className="token-ca"><span>VERIFIED MINT ADDRESS</span><strong>{TOKEN.mintAddress || 'NOT PUBLISHED'}</strong><small>Solana · {TOKEN_IS_LIVE ? 'Official Murven mint' : 'Mint address will be announced here'}</small></div>
+        <div className="token-ca"><span>VERIFIED MINT ADDRESS</span><strong className={TOKEN_IS_LIVE ? 'is-address' : ''}>{TOKEN.mintAddress || 'NOT PUBLISHED'}</strong><small>Solana · {TOKEN_IS_LIVE ? 'Official Murven mint' : 'Mint address will be announced here'}</small></div>
         <div className="token-links">
           <a href={TOKEN.buyUrl} target="_blank" rel="noreferrer"><span>PUMP.FUN</span><b>{TOKEN_IS_LIVE ? `Buy $${TOKEN.symbol}` : 'Launchpad'}</b><ArrowUpRight /></a>
           <a href="https://fomo.family" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trading app</b><ArrowUpRight /></a>
@@ -244,7 +244,7 @@ function DeveloperSection() {
         <h2>Privacy needs<br /><em>more builders.</em></h2>
         <p>We are four people working in the open across zero-knowledge circuits, contracts, wallets and protocol security.</p>
         <div className="dev-stack"><span>Circom</span><span>Rust / sBPF</span><span>Groth16</span><span>JavaScript SDK</span></div>
-        <div className="dev-actions"><a className="primary-btn green" href={`${BASE}docs.html`}><Code2 />Read the docs</a><a className="primary-btn outline" href="https://x.com/sarruncash" target="_blank" rel="noreferrer">Follow Murven on X <ArrowUpRight /></a></div>
+        <div className="dev-actions"><a className="primary-btn green" href={`${BASE}docs.html`}><Code2 />Read the docs</a><a className="primary-btn outline" href="https://x.com/murvendotfun" target="_blank" rel="noreferrer">Follow Murven on X <ArrowUpRight /></a></div>
       </div>
       <div className="dev-note">hard problem?<br /><b>good.</b></div>
     </section>
@@ -264,7 +264,7 @@ function FAQ() {
 function Footer() {
   return (
     <footer>
-      <div className="footer-main"><Logo /><p>Your money is none of<br />the internet’s business.</p><div><a href="#product">Product</a><a href="#security">Security</a><a href="#token">Token</a><a href={`${BASE}docs.html`}>Docs</a><a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">X ↗</a></div></div>
+      <div className="footer-main"><Logo /><p>Your money is none of<br />the internet’s business.</p><div><a href="#product">Product</a><a href="#security">Security</a><a href="#token">Token</a><a href={`${BASE}docs.html`}>Docs</a><a href="https://x.com/murvendotfun" target="_blank" rel="noreferrer">X ↗</a></div></div>
       <div className="footer-bottom"><span>© 2026 Murven</span><span>Non-custodial privacy infrastructure for Solana.</span><a href={CHAIN.blockExplorerUrls[0]} target="_blank" rel="noreferrer">Mainnet explorer <ArrowUpRight /></a></div>
     </footer>
   )
@@ -441,7 +441,7 @@ function AppShell({ close }) {
 
         {activeTab === 'recovery' && <section className="app-panel"><div className="app-panel-head"><span className="eyebrow">RECOVERY & RECEIVE</span><h1>Your keys stay local.</h1><p>Create a one-time Murven receiving address, scan encrypted output events, or restore an existing note. Receiver files and note files contain spending authority.</p></div><div className="receive-grid"><article className="receive-card"><KeyRound /><span>PRIVATE RECEIVING ADDRESS</span><h2>{receiverRecovery ? 'Address ready' : 'Create a one-time address'}</h2><p>Share the address, not the downloaded receiver file. The file is required to discover and spend incoming notes.</p>{receiverRecovery && <button className="address-output" onClick={() => navigator.clipboard?.writeText(receiverRecovery.address)}>{receiverRecovery.address.slice(0, 28)}… <Copy /></button>}<div><button onClick={createReceiver} disabled={busy}>{receiverRecovery ? 'Create another' : 'Create address'}</button>{receiverRecovery && <button onClick={scanNotes} disabled={busy}>{busy ? 'Scanning…' : 'Scan notes'}</button>}</div></article><article className="recovery-panel compact"><FileCheck2 /><div><span>IMPORT LOCAL RECORD</span><h2>{recovery ? 'Spendable note loaded' : receiverRecovery ? 'Receiver record loaded' : 'Choose a Murven JSON file'}</h2><p>The file is parsed in this browser and is never uploaded.</p></div><input id="recovery-file" type="file" accept="application/json,.json" onChange={importRecovery} /><label htmlFor="recovery-file">Choose file <ArrowRight /></label></article></div>{importError && <div className="wallet-error action-error">{importError}</div>}{receivedNotes.length > 0 && <div className="note-list">{receivedNotes.map((item, index) => <article key={`${item.record.transactionHash}-${index}`} className={item.spent ? 'spent' : ''}><div><span>ENCRYPTED NOTE</span><b>{item.spent ? 'Spent' : 'Spendable'}</b></div><code>{item.record.transactionHash?.slice(0, 18)}…</code><button disabled={item.spent} onClick={() => { setRecovery(item.record); downloadRecoveryRecord(item.record) }}>{item.spent ? 'Already spent' : 'Use & download'}</button></article>)}</div>}{recovery && <div className="recovery-summary"><div><span>NETWORK</span><b>Solana · mainnet-beta</b></div><div><span>NOTE</span><b>{String(recovery.note).slice(0, 12)}…{String(recovery.note).slice(-8)}</b></div><div><span>SOURCE TX</span><b>{recovery.transactionHash ? `${recovery.transactionHash.slice(0, 12)}…${recovery.transactionHash.slice(-8)}` : 'Prepared locally'}</b></div><button onClick={() => downloadRecoveryRecord(recovery)}>Download a copy</button></div>}</section>}
 
-        {activeTab === 'help' && <section className="app-panel"><div className="app-panel-head"><span className="eyebrow">HOW MURVEN WORKS</span><h1>Three actions.<br />One private state.</h1><p>Murven hides the internal note ownership graph. It does not hide RPC metadata, timing, or the public entry and exit transactions.</p></div><div className="help-steps"><article><b>01</b><div><h2>Shield</h2><p>Deposit SOL from a public wallet. Save the recovery file before signing.</p></div></article><article><b>02</b><div><h2>Transfer</h2><p>Send to a one-time Murven address. The receiver discovers the encrypted note using their local receiver file.</p></div></article><article><b>03</b><div><h2>Exit</h2><p>Spend a note to a public address. The recipient and amount are visible onchain.</p></div></article></div><div className="panel-actions"><a className="primary-btn green" href={`${BASE}docs.html`}>Read documentation <ArrowRight /></a><a className="primary-btn outline" href="https://x.com/sarruncash" target="_blank" rel="noreferrer">Ask on X <ArrowUpRight /></a></div></section>}
+        {activeTab === 'help' && <section className="app-panel"><div className="app-panel-head"><span className="eyebrow">HOW MURVEN WORKS</span><h1>Three actions.<br />One private state.</h1><p>Murven hides the internal note ownership graph. It does not hide RPC metadata, timing, or the public entry and exit transactions.</p></div><div className="help-steps"><article><b>01</b><div><h2>Shield</h2><p>Deposit SOL from a public wallet. Save the recovery file before signing.</p></div></article><article><b>02</b><div><h2>Transfer</h2><p>Send to a one-time Murven address. The receiver discovers the encrypted note using their local receiver file.</p></div></article><article><b>03</b><div><h2>Exit</h2><p>Spend a note to a public address. The recipient and amount are visible onchain.</p></div></article></div><div className="panel-actions"><a className="primary-btn green" href={`${BASE}docs.html`}>Read documentation <ArrowRight /></a><a className="primary-btn outline" href="https://x.com/murvendotfun" target="_blank" rel="noreferrer">Ask on X <ArrowUpRight /></a></div></section>}
       </main>
     </div>
   )
