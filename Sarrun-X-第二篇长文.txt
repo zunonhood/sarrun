@@ -1,4 +1,4 @@
-﻿Sarrun：我们不想在 Robinhood Chain 上复制一个 Tornado Cash
+Sarrun：我们不想在 Solana 上复制一个 Tornado Cash
 
 这是 Sarrun 的第二次发声。
 
@@ -21,7 +21,7 @@
 
 Sarrun 想向前走一步。
 
-我们正在构建的不是一个固定面额的混币轮次，也不是简单地把 Tornado Cash 部署到另一条链。Sarrun 是一个面向 Robinhood Chain 的非托管隐私账户协议：资产进入屏蔽状态以后，可以继续以私密票据的形式持有、转移、接收和退出，而不需要每次都回到公开账户图谱。
+我们正在构建的不是一个固定面额的混币轮次，也不是简单地把 Tornado Cash 部署到另一条链。Sarrun 是一个面向 Solana 的非托管隐私账户协议：资产进入屏蔽状态以后，可以继续以私密票据的形式持有、转移、接收和退出，而不需要每次都回到公开账户图谱。
 
 这就是我们对 Sarrun 最简单的定义：
 
@@ -34,7 +34,7 @@ Sarrun 想向前走一步。
 
 1. Shield
 
-用户连接 EVM 钱包，把 Robinhood Chain 上的 ETH 存入 Sarrun。
+用户连接 Solana 钱包，把 Solana 上的 SOL 存入 Sarrun。
 
 这笔存款交易和存款金额是公开的，但协议不会在链上保存一个“某地址拥有多少隐私余额”的公开账户。客户端会在用户设备上生成一次性的支出秘密，并把资产表示为一个隐藏金额与所有权信息的私密票据。
 
@@ -50,7 +50,7 @@ Sarrun 想向前走一步。
 
 3. Exit
 
-用户可以把私密票据的一部分或全部退出到公开 EVM 地址。
+用户可以把私密票据的一部分或全部退出到公开 Solana 地址。
 
 退出后的接收地址与退出金额会重新进入公开链上视野；如果票据还有剩余价值，剩余部分会进入一个全新的私密找零票据，而不是回到原来的公开钱包余额。
 
@@ -107,7 +107,7 @@ Merkle Root、两个 Nullifier、两个输出承诺、公开退出金额、公�
 
 票据金额、票据所有者、Merkle Path、支出秘密和输出随机量都属于私有 witness，不需要提交给链上。
 
-换句话说，Robinhood Chain 验证的是“这次状态转换是合法的”，而不是“这笔钱从谁转给了谁”。
+换句话说，Solana 验证的是“这次状态转换是合法的”，而不是“这笔钱从谁转给了谁”。
 
 
 五、私密收款不是复制一个地址
@@ -125,20 +125,20 @@ Sarrun 的一次性收款地址同时包含：
 
 收款地址可以公开分享；接收密钥文件不能分享。
 
-这让 Sarrun 的接收体验不依赖中心化数据库。即使网站停止运行，只要 Robinhood Chain、协议合约和公开证明材料仍然存在，用户仍然可以从链上重建状态。
+这让 Sarrun 的接收体验不依赖中心化数据库。即使网站停止运行，只要 Solana、链上程序和公开证明材料仍然存在，用户仍然可以从链上重建状态。
 
 
 六、合约层负责什么，不负责什么？
 
-Sarrun 的 ShieldedPool 合约只承担最小而明确的责任：
+Sarrun 的 Sarrun Program只承担最小而明确的责任：
 
-• 把真实 ETH 与票据承诺绑定
+• 把真实 SOL 与票据承诺绑定
 • 维护增量 Poseidon Merkle Tree
 • 保存有限的历史 Root
 • 防止重复承诺与重复 Nullifier
 • 调用 Groth16 Verifier 验证 JoinSplit 证明
 • 插入新的输出承诺
-• 在公开退出时向指定地址释放 ETH
+• 在公开退出时向指定地址释放 SOL
 • 发布有严格长度上限的加密输出载荷
 
 合约不会保存用户的支出秘密、查看私钥、恢复文件或私密余额。
@@ -169,11 +169,11 @@ Sarrun 的目标是切断屏蔽状态内部的公开所有权图谱，但这不�
 我们宁愿准确地描述隐私边界，也不愿用“完全无法追踪”吸引用户把资产置于错误的安全假设中。
 
 
-八、为什么选择 Robinhood Chain？
+八、为什么选择 Solana？
 
-Robinhood Chain 使用 ETH 作为原生 Gas 资产，并兼容 EVM 工具链。
+Solana 使用 SOL 作为原生资产，并采用并行账户模型与 sBPF 程序运行时。
 
-这意味着 Sarrun 可以使用成熟的 Solidity、Hardhat、ethers.js 和浏览器钱包生态，同时把隐私账户带到一个围绕链上金融与真实世界资产构建的新环境中。
+这意味着 Sarrun 可以使用Rust/sBPF、Solana Kit、Wallet Standard 与高吞吐账户模型，同时把隐私账户带到一个围绕链上金融与真实世界资产构建的新环境中。
 
 我们感兴趣的不只是“在一条新链上部署一个隐私池”。
 
@@ -206,7 +206,7 @@ Sarrun 的生产发布需要满足一组强制条件：
 
 十、Sarrun 最终想成为什么？
 
-我们当然希望 Sarrun 首先成为 Robinhood Chain 上真正可用的隐私账户。
+我们当然希望 Sarrun 首先成为 Solana 上真正可用的隐私账户。
 
 但我们的目标并不止于一个应用页面。
 
@@ -241,7 +241,7 @@ Sarrun 的生产发布需要满足一组强制条件：
 
 Sarrun 不想复制过去。
 
-Tornado Cash 证明了链上隐私拥有真实而强烈的需求。Zcash 与 Monero 证明了隐私可以被放进资产与协议本身。今天，我们想在 Robinhood Chain 上继续追问：如果隐私不再是一次混币，而是一个可以持续持有、接收、转移和退出的账户，它应该是什么样子？
+Tornado Cash 证明了链上隐私拥有真实而强烈的需求。Zcash 与 Monero 证明了隐私可以被放进资产与协议本身。今天，我们想在 Solana 上继续追问：如果隐私不再是一次混币，而是一个可以持续持有、接收、转移和退出的账户，它应该是什么样子？
 
 我们的答案还需要代码、证明、审计和真实用户共同完成。
 
@@ -250,11 +250,11 @@ Tornado Cash 证明了链上隐私拥有真实而强烈的需求。Zcash 与 Mon
 你的钱，不关互联网的事。
 
 Sarrun
-Non-custodial privacy infrastructure for Robinhood Chain.
+Non-custodial privacy infrastructure for Solana.
 
 
 发布时可附在文末：
 
 Official X: https://x.com/sarruncash
-Documentation: [上线后填写正式 Docs 地址]
-Contract: 当前没有已发布的官方 CA。任何未同时出现在官网与 @sarruncash 的地址都不是 Sarrun 官方地址。
+Documentation: https://sarrun.fun/docs.html
+Mint: 当前没有已发布的官方 CA。任何未同时出现在官网与 @sarruncash 的地址都不是 Sarrun 官方地址。

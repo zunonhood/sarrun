@@ -4,7 +4,7 @@ import { SNARK_SCALAR_FIELD } from './constants.js'
 
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
-const ADDRESS_PREFIX = 'sarrun:rh:1:'
+const ADDRESS_PREFIX = 'sarrun:sol:1:'
 const ENVELOPE_PREFIX = 'sarrun-note:1:'
 
 function bytesToBase64Url(bytes) {
@@ -62,7 +62,8 @@ export async function createPaymentAddress() {
     recovery: {
       version: 1,
       kind: 'sarrun-receiver',
-      chainId: 4663,
+      cluster: 'mainnet-beta',
+      chain: 'solana:mainnet',
       address,
       ownerSecret: ownerSecret.toString(),
       viewingPrivateKey: bytesToBase64Url(viewingPrivateKey),

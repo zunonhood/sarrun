@@ -42,7 +42,7 @@ template NoteCommitment() {
 }
 
 template JoinSplit(depth) {
-    // This declaration order is the eight-field verifier ABI used by ShieldedPool.
+    // This declaration order is the eight-field verifier ABI consumed by the Solana program.
     signal output rootOut;
     signal output nullifier0;
     signal output nullifier1;

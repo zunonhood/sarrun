@@ -1,0 +1,33 @@
+{
+  "cluster": "mainnet-beta",
+  "chain": "solana:mainnet",
+  "network": "Solana",
+  "nativeSymbol": "SOL",
+  "rpcUrl": "https://api.mainnet.solana.com",
+  "explorerUrl": "https://explorer.solana.com",
+  "deploymentSlot": null,
+  "programId": null,
+  "accounts": {
+    "poolState": null,
+    "vault": null
+  },
+  "artifacts": {
+    "joinSplitWasm": null,
+    "joinSplitZkey": null,
+    "verificationKey": null,
+    "programBinary": null,
+    "idl": null
+  },
+  "ceremony": null,
+  "artifactHashes": {
+    "joinSplitWasm": null,
+    "joinSplitZkey": null,
+    "verificationKey": null,
+    "programBinary": null,
+    "idl": null
+  },
+  "audits": [],
+  "release": {
+    "sourceCommit": null
+  }
+}

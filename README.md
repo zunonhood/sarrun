@@ -1,68 +1,51 @@
 # Sarrun
 
-Website: https://zunonhood.github.io/sarrun/
+Website: https://sarrun.fun/
 
-Sarrun is a non-custodial shielded account protocol for Robinhood Chain. The repository contains the public website, application shell, Solidity settlement contracts, Circom JoinSplit circuit, JavaScript SDK, deployment registry and end-to-end tests.
+Sarrun is a non-custodial shielded-account protocol designed for Solana. The browser connects through Wallet Standard, reads SOL state from mainnet-beta, creates one-time private receiving addresses locally, and consumes a single reviewed deployment manifest.
 
 ## Protocol
 
-A public ETH deposit is bound onchain to a Poseidon commitment:
+A public SOL deposit is bound to a Poseidon note commitment:
 
 ```text
-commitment = Poseidon(assetId, value, ownerPublicKey, rho, randomness)
+commitment = Poseidon(assetId, valueLamports, ownerPublicKey, rho, randomness)
 ```
 
-Private transitions consume up to two notes, create two notes and optionally expose a public exit. The Groth16 statement publishes exactly:
+Private transitions consume up to two notes, create two fresh notes, and may expose a public SOL exit. The Groth16 statement publishes exactly:
 
 ```text
 root, nullifier0, nullifier1, outputCommitment0, outputCommitment1,
 publicAmount, recipient, assetId
 ```
 
-Private witnesses include note values, spending secrets, randomness and 20-level Merkle paths. Values are range constrained to 128 bits and the circuit enforces input conservation.
+Private witnesses include note values, spending secrets, randomness, output owners, and 20-level Merkle paths. The circuit range-checks values and enforces conservation.
 
-## Repository map
+## Solana architecture
 
-- `contracts/ShieldedPool.sol` — deposit binding, Poseidon tree, root history, nullifiers and native exits.
-- `circuits/JoinSplit.circom` — two-input/two-output zero-knowledge transition.
-- `sdk/` — notes, one-time receiving addresses, encrypted delivery, Merkle paths and proof generation.
-- `src/protocol.js` — browser Shield, Transfer, Exit, chain reconstruction, scanning and recovery client.
-- `deployments/robinhood-mainnet.json` — the only address registry consumed by the client.
-- `test/` — contract, SDK, circuit and full proof integration checks.
-- `SECURITY.md` — security and release boundaries.
+- `programs/sarrun/ARCHITECTURE.md` — PDA, vault, nullifier, instruction, verifier, and release boundaries.
+- `circuits/JoinSplit.circom` — two-input/two-output value-conserving JoinSplit.
+- `sdk/` — Poseidon notes, encrypted delivery, Merkle paths, and browser proof generation.
+- `src/solana-client.js` — official Solana Kit client using Wallet Standard and mainnet RPC.
+- `src/protocol.js` — deployment-gated browser protocol boundary.
+- `deployments/solana-mainnet.json` — the only program/account/artifact registry consumed by the client.
+- `test/` — SDK and circuit constraint tests.
+- `SECURITY.md` — threat model and mainnet release gate.
+
+Solana programs are stateless; mutable protocol state lives in PDAs. The pool state stores the commitment-tree frontier and recent roots, a program-owned vault backs live SOL notes, and nullifier PDAs make a second spend fail at account creation. Groth16 BN254 verification maps to Solana's `alt_bn128` runtime syscalls.
 
 ## Commands
 
 ```bash
 npm install
-npm run protocol:test
-npm run circuits:compile
-npm run contracts:compile
+npm run sdk:test
+npm run circuits:test
 npm run build
 npm run dev
 ```
 
-The generated local zkey and verifier carry `.local` in their names and exist only for integration tests. A Robinhood Chain deployment must use a verifier produced from a public ceremony and independently reviewed artifacts.
+## Mainnet activation
 
-## Robinhood Chain deployment
+The checked-in manifest intentionally keeps `programId` and artifact locations null until one reviewed release binds all of the following: Rust program binary, embedded verification key, final ceremony artifacts, client encoder, audit references, deployment slot, and source commit. The app connects to Solana mainnet today but will not create value-moving instructions until that registry is complete.
 
-Production activation is gated. A final non-local ZKey must verify against the reviewed R1CS and PTAU transcript; ceremony, audit and source-commit metadata must be present before deployment:
-
-```bash
-set SARRUN_FINAL_ZKEY=C:\secure\JoinSplit.production.zkey
-set SARRUN_FINAL_PTAU=C:\secure\powersOfTau.final.ptau
-set SARRUN_CEREMONY_URL=https://...
-set SARRUN_AUDIT_URL=https://...
-set SARRUN_SOURCE_COMMIT=<reviewed commit>
-npm run release:prepare
-npm run release:predeploy
-set DEPLOYER_PRIVATE_KEY=0x...
-npm run deploy:robinhood
-npm run release:check
-```
-
-Never commit, upload or paste a deployer private key. Set it only in the local deployment environment. After deployment, the script writes the Poseidon, verifier and pool addresses to both the source manifest and the public manifest used by Docs.
-
-## Security
-
-Do not treat passing tests as an audit. Review the circuit, contracts, client-side key lifecycle, ceremony transcript, bytecode and deployment manifest before placing assets at risk. See `SECURITY.md`.
+Never commit a program authority or wallet secret. Do not treat passing tests as an audit.
