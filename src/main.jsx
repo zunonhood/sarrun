@@ -23,6 +23,13 @@ const CHAIN = {
   blockExplorerUrls: ['https://explorer.solana.com'],
 }
 
+const TOKEN = {
+  symbol: 'MURVEN',
+  mintAddress: null,
+  buyUrl: 'https://pump.fun/',
+}
+const TOKEN_IS_LIVE = Boolean(TOKEN.mintAddress && TOKEN.buyUrl)
+
 const faqs = [
   ['What is Murven?', 'Murven is a non-custodial shielded account protocol for native SOL on Solana. It uses private note commitments and zero-knowledge proofs instead of a public account graph.'],
   ['Is Murven a mixer?', 'No. Murven is a persistent shielded account: users hold private notes and authorize transfers with zero-knowledge proofs rather than depositing into a fixed-denomination mixing round.'],
@@ -72,7 +79,7 @@ function Header({ openApp }) {
         <a className="header-github" href={`${BASE}docs.html#repository`} aria-label="Browse protocol source"><GithubBrand /></a>
         <a className="header-fomo" href="https://fomo.family" target="_blank" rel="noreferrer" aria-label="Open Fomo trading app"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
         <a className="header-x" href="https://x.com/sarruncash" target="_blank" rel="noreferrer" aria-label="Follow Murven on X"><XBrand /></a>
-        <a className="primary-btn light token-buy" href="https://pump.fun/" target="_blank" rel="noreferrer">Launch on Pump.fun <ArrowRight /></a>
+        <a className="primary-btn light token-buy" href={TOKEN.buyUrl} target="_blank" rel="noreferrer">{TOKEN_IS_LIVE ? `Buy $${TOKEN.symbol}` : 'Launch on Pump.fun'} <ArrowRight /></a>
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label="Menu">{menu ? <X /> : <Menu />}</button>
       </div>
     </header>
@@ -218,12 +225,12 @@ function TokenSection() {
         <p>MURVEN will launch on Pump.fun. Until the verified mint address appears here and on the <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">official Murven X account</a>, assume every token using our name is unrelated.</p>
       </div>
       <div className="token-console">
-        <div className="token-ca"><span>VERIFIED MINT ADDRESS</span><strong>NOT PUBLISHED</strong><small>Solana · Mint address will be announced here</small></div>
+        <div className="token-ca"><span>VERIFIED MINT ADDRESS</span><strong>{TOKEN.mintAddress || 'NOT PUBLISHED'}</strong><small>Solana · {TOKEN_IS_LIVE ? 'Official Murven mint' : 'Mint address will be announced here'}</small></div>
         <div className="token-links">
-          <a href="https://pump.fun/" target="_blank" rel="noreferrer"><span>PUMP.FUN</span><b>Launchpad</b><ArrowUpRight /></a>
+          <a href={TOKEN.buyUrl} target="_blank" rel="noreferrer"><span>PUMP.FUN</span><b>{TOKEN_IS_LIVE ? `Buy $${TOKEN.symbol}` : 'Launchpad'}</b><ArrowUpRight /></a>
           <a href="https://fomo.family" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trading app</b><ArrowUpRight /></a>
         </div>
-        <p><Lock /> These are platform homepages, not MURVEN trading pairs. Token-specific links will only activate after the verified mint is published here and on the official Murven X account.</p>
+        <p><Lock /> {TOKEN_IS_LIVE ? 'Verify this mint against the official Murven X account before trading.' : 'These are platform homepages, not MURVEN trading pairs. Token-specific links will only activate after the verified mint is published here and on the official Murven X account.'}</p>
       </div>
     </section>
   )
