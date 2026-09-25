@@ -12,7 +12,7 @@ await page.getByRole('link', { name: 'Docs', exact: true }).first().click()
 await page.waitForLoadState('networkidle')
 const docsText = await page.locator('body').innerText()
 await page.screenshot({ path: 'qa-solana-docs.png', fullPage: true })
-const docs = { url: page.url(), title: await page.title(), sourceVisible: await page.getByText('sarrun / protocol').isVisible(), logoLoaded: await page.locator('.docs-logo img').evaluate(image => image.complete && image.naturalWidth > 0), hasSolana: docsText.includes('Solana'), hasLegacy: /Robinhood Chain|\bETH\b|EVM wallet/.test(docsText) }
+const docs = { url: page.url(), title: await page.title(), sourceVisible: await page.getByText('murven / protocol').isVisible(), logoLoaded: await page.locator('.docs-logo img').evaluate(image => image.complete && image.naturalWidth > 0), hasSolana: docsText.includes('Solana'), hasLegacy: /Robinhood Chain|\bETH\b|EVM wallet/.test(docsText) }
 console.log(JSON.stringify({ home, docs, errors }, null, 2))
 if (!home.logoLoaded || !home.hasSolana || home.hasLegacy || !docs.logoLoaded || !docs.sourceVisible || !docs.hasSolana || docs.hasLegacy || errors.length) process.exitCode = 1
 await browser.close()

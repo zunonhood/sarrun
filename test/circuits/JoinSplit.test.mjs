@@ -4,14 +4,14 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { unlink } from 'node:fs/promises'
 import * as snarkjs from 'snarkjs'
-import { createNote, noteNullifier, ownerPublicKey, SarrunMerkleTree } from '../../sdk/index.js'
+import { createNote, noteNullifier, ownerPublicKey, MurvenMerkleTree } from '../../sdk/index.js'
 
 const wasmPath = join(process.cwd(), 'circuits', 'build', 'JoinSplit.wasm')
 
 async function fixture() {
   const ownerSecret = 12345n
   const input = await createNote({ value: 100n, ownerSecret, rho: 111n, randomness: 222n })
-  const tree = new SarrunMerkleTree()
+  const tree = new MurvenMerkleTree()
   tree.append(input.commitment)
   const membership = await tree.proof(0)
   const recipient = 0n
@@ -41,7 +41,7 @@ async function fixture() {
 
 test('JoinSplit witness exposes the documented eight-field verifier ABI', async () => {
   const { circuitInput, expected } = await fixture()
-  const output = join(tmpdir(), `sarrun-${Date.now()}.wtns`)
+  const output = join(tmpdir(), `murven-${Date.now()}.wtns`)
   try {
     await snarkjs.wtns.calculate(circuitInput, wasmPath, output)
     const witness = await snarkjs.wtns.exportJson(output)
@@ -54,7 +54,7 @@ test('JoinSplit witness exposes the documented eight-field verifier ABI', async 
 test('JoinSplit rejects value creation', async () => {
   const { circuitInput } = await fixture()
   circuitInput.outputValue = [61n, 40n]
-  const output = join(tmpdir(), `sarrun-invalid-${Date.now()}.wtns`)
+  const output = join(tmpdir(), `murven-invalid-${Date.now()}.wtns`)
   await assert.rejects(snarkjs.wtns.calculate(circuitInput, wasmPath, output))
   await unlink(output).catch(() => {})
 })

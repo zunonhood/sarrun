@@ -13,7 +13,7 @@ test('uses a single fail-closed Solana mainnet deployment manifest', () => {
 
 test('creates Solana-scoped private receiver records', async () => {
   const receiver = await createPaymentAddress()
-  assert.match(receiver.address, /^sarrun:sol:1:/)
+  assert.match(receiver.address, /^murven:sol:1:/)
   assert.equal(receiver.recovery.cluster, 'mainnet-beta')
   assert.equal(receiver.recovery.chain, 'solana:mainnet')
 })

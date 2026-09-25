@@ -1,8 +1,8 @@
-# Sarrun
+# Murven
 
 Website: https://sarrun.fun/
 
-Sarrun is a non-custodial shielded-account protocol designed for Solana. The browser connects through Wallet Standard, reads SOL state from mainnet-beta, creates one-time private receiving addresses locally, and consumes a single reviewed deployment manifest.
+Murven is a non-custodial shielded-account protocol designed for Solana. The browser connects through Wallet Standard, reads SOL state from mainnet-beta, creates one-time private receiving addresses locally, and consumes a single reviewed deployment manifest.
 
 ## Protocol
 
@@ -23,7 +23,7 @@ Private witnesses include note values, spending secrets, randomness, output owne
 
 ## Solana architecture
 
-- `programs/sarrun/ARCHITECTURE.md` — PDA, vault, nullifier, instruction, verifier, and release boundaries.
+- `programs/murven/ARCHITECTURE.md` — PDA, vault, nullifier, instruction, verifier, and release boundaries.
 - `circuits/JoinSplit.circom` — two-input/two-output value-conserving JoinSplit.
 - `sdk/` — Poseidon notes, encrypted delivery, Merkle paths, and browser proof generation.
 - `src/solana-client.js` — official Solana Kit client using Wallet Standard and mainnet RPC.

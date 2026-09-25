@@ -1,10 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { createNote, noteCommitment, noteNullifier, ownerPublicKey, parseNote, serializeNote, SarrunMerkleTree } from '../../sdk/index.js'
+import { createNote, noteCommitment, noteNullifier, ownerPublicKey, parseNote, serializeNote, MurvenMerkleTree } from '../../sdk/index.js'
 import { poseidon1 } from 'poseidon-lite/poseidon1'
 import { poseidon5 } from 'poseidon-lite/poseidon5'
 
-test('creates, commits and serializes a Sarrun note deterministically', async () => {
+test('creates, commits and serializes a Murven note deterministically', async () => {
   const secret = 123456789n
   const note = await createNote({ value: 42n, ownerSecret: secret })
   assert.equal(note.ownerPublicKey, await ownerPublicKey(secret))
@@ -21,7 +21,7 @@ test('different randomness produces unlinkable commitments', async () => {
 })
 
 test('builds Merkle paths that resolve to the published root', async () => {
-  const tree = new SarrunMerkleTree({ depth: 4 })
+  const tree = new MurvenMerkleTree({ depth: 4 })
   tree.append(11n); tree.append(22n); tree.append(33n)
   const proof = await tree.proof(1)
   assert.equal(proof.pathIndices.length, 4)

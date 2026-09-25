@@ -1,6 +1,6 @@
-# Sarrun Solana program boundary
+# Murven Solana program boundary
 
-Sarrun targets Solana mainnet-beta as a native SOL shielded-account protocol.
+Murven targets Solana mainnet-beta as a native SOL shielded-account protocol.
 
 ## Accounts
 

@@ -4,8 +4,8 @@ import { SNARK_SCALAR_FIELD } from './constants.js'
 
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
-const ADDRESS_PREFIX = 'sarrun:sol:1:'
-const ENVELOPE_PREFIX = 'sarrun-note:1:'
+const ADDRESS_PREFIX = 'murven:sol:1:'
+const ENVELOPE_PREFIX = 'murven-note:1:'
 
 function bytesToBase64Url(bytes) {
   if (typeof Buffer !== 'undefined') return Buffer.from(bytes).toString('base64url')
@@ -26,7 +26,7 @@ function encodeObject(prefix, value) {
 }
 
 function decodeObject(prefix, encoded) {
-  if (typeof encoded !== 'string' || !encoded.startsWith(prefix)) throw new Error('Unsupported Sarrun encoding.')
+  if (typeof encoded !== 'string' || !encoded.startsWith(prefix)) throw new Error('Unsupported Murven encoding.')
   return JSON.parse(decoder.decode(base64UrlToBytes(encoded.slice(prefix.length))))
 }
 
@@ -42,7 +42,7 @@ async function envelopeKey(sharedSecret, ephemeralPublicKey, recipientPublicKey)
   return crypto.subtle.deriveKey({
     name: 'HKDF',
     hash: 'SHA-256',
-    salt: encoder.encode('Sarrun encrypted note v1'),
+    salt: encoder.encode('Murven encrypted note v1'),
     info: concatBytes(ephemeralPublicKey, recipientPublicKey),
   }, material, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt'])
 }
@@ -61,7 +61,7 @@ export async function createPaymentAddress() {
     public: { ownerPublicKey: spendPublicKey, viewingPublicKey },
     recovery: {
       version: 1,
-      kind: 'sarrun-receiver',
+      kind: 'murven-receiver',
       cluster: 'mainnet-beta',
       chain: 'solana:mainnet',
       address,
@@ -75,7 +75,7 @@ export function parsePaymentAddress(address) {
   const decoded = decodeObject(ADDRESS_PREFIX, address)
   const ownerKey = BigInt(decoded.s)
   const viewingKey = base64UrlToBytes(decoded.v)
-  if (ownerKey <= 0n || ownerKey >= SNARK_SCALAR_FIELD || viewingKey.length !== 32) throw new Error('Invalid Sarrun payment address.')
+  if (ownerKey <= 0n || ownerKey >= SNARK_SCALAR_FIELD || viewingKey.length !== 32) throw new Error('Invalid Murven payment address.')
   return { ownerPublicKey: ownerKey, viewingPublicKey: viewingKey }
 }
 
@@ -95,8 +95,8 @@ export async function encryptNoteForAddress(serializedNote, address) {
 }
 
 export async function decryptNoteEnvelope(envelope, receiverRecovery) {
-  if (receiverRecovery?.kind !== 'sarrun-receiver' || !receiverRecovery?.viewingPrivateKey || !receiverRecovery?.ownerSecret) {
-    throw new Error('A valid Sarrun receiver recovery record is required.')
+  if (receiverRecovery?.kind !== 'murven-receiver' || !receiverRecovery?.viewingPrivateKey || !receiverRecovery?.ownerSecret) {
+    throw new Error('A valid Murven receiver recovery record is required.')
   }
   const decoded = decodeObject(ENVELOPE_PREFIX, envelope)
   const ephemeralPublicKey = base64UrlToBytes(decoded.e)

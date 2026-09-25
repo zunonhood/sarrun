@@ -14,7 +14,7 @@ export function getProtocolConfig() {
 
 function requireDeployment() {
   const config = getProtocolConfig()
-  if (!config.configured) throw new Error('The verified Sarrun Solana program is not published in the deployment manifest.')
+  if (!config.configured) throw new Error('The verified Murven Solana program is not published in the deployment manifest.')
   if (!config.provingReady) throw new Error('The verified production proving artifacts are not published.')
   throw new Error('The Solana instruction client will activate only after the reviewed program ID and verifier artifacts are published together.')
 }
@@ -43,7 +43,7 @@ export function downloadRecoveryRecord(record) {
   const link = document.createElement('a')
   link.href = url
   const suffix = record.signature ? record.signature.slice(0, 8) : Date.now()
-  link.download = `sarrun-${record.kind === 'sarrun-receiver' ? 'receiver' : 'recovery'}-${suffix}.json`
+  link.download = `murven-${record.kind === 'murven-receiver' ? 'receiver' : 'recovery'}-${suffix}.json`
   link.click()
   URL.revokeObjectURL(url)
 }
