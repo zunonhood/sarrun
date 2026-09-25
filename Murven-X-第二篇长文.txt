@@ -256,5 +256,5 @@ Non-custodial privacy infrastructure for Solana.
 发布时可附在文末：
 
 Official X: https://x.com/sarruncash
-Documentation: https://sarrun.fun/docs.html
+Documentation: https://murven.fun/docs.html
 Mint: 当前没有已发布的官方 CA。任何未同时出现在官网与 @sarruncash 的地址都不是 Murven 官方地址。

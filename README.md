@@ -1,6 +1,6 @@
 # Murven
 
-Website: https://sarrun.fun/
+Website: https://murven.fun/
 
 Murven is a non-custodial shielded-account protocol designed for Solana. The browser connects through Wallet Standard, reads SOL state from mainnet-beta, creates one-time private receiving addresses locally, and consumes a single reviewed deployment manifest.
 
