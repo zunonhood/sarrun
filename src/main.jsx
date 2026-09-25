@@ -42,7 +42,7 @@ const faqs = [
 function Logo({ dark = false, markOnly = false }) {
   return (
     <a className={'logo ' + (dark ? 'logo-dark' : '')} href="#top" aria-label="Murven home">
-      <span className="logo-mark"><img src={`${BASE}murven-logo.png`} alt="" /></span>
+      <span className="logo-mark"><img src={`${BASE}murven-logo-transparent.png`} alt="" /></span>
       {!markOnly && <span className="logo-word">murven</span>}
     </a>
   )
