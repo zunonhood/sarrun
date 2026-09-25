@@ -70,9 +70,9 @@ function Header({ openApp }) {
       <div className="header-end">
         <a className="chain-pill" href={CHAIN.blockExplorerUrls[0]} target="_blank" rel="noreferrer"><i />Solana</a>
         <a className="header-github" href={`${BASE}docs.html#repository`} aria-label="Browse protocol source"><GithubBrand /></a>
-
+        <a className="header-fomo" href="https://fomo.family" target="_blank" rel="noreferrer" aria-label="Open Fomo trading app"><img src={`${BASE}fomo-logo.svg`} alt="" /></a>
         <a className="header-x" href="https://x.com/sarruncash" target="_blank" rel="noreferrer" aria-label="Follow Sarrun on X"><XBrand /></a>
-        <a className="primary-btn light token-buy" href="#token">Token status <ArrowRight /></a>
+        <a className="primary-btn light token-buy" href="https://pump.fun/" target="_blank" rel="noreferrer">Launch on Pump.fun <ArrowRight /></a>
         <button className="menu-btn" onClick={() => setMenu(!menu)} aria-label="Menu">{menu ? <X /> : <Menu />}</button>
       </div>
     </header>
@@ -214,16 +214,16 @@ function TokenSection() {
     <section className="token-section" id="token">
       <div className="token-copy">
         <span className="eyebrow">SARRUN TOKEN</span>
-        <h2>No mint.<br /><em>No guessing.</em></h2>
-        <p>Sarrun has not launched a token. Until the verified mint address appears here and on <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">@sarruncash</a>, assume every token using our name is unrelated.</p>
+        <h2>Pump.fun launch.<br /><em>One official mint.</em></h2>
+        <p>SARRUN will launch on Pump.fun. Until the verified mint address appears here and on <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer">@sarruncash</a>, assume every token using our name is unrelated.</p>
       </div>
       <div className="token-console">
         <div className="token-ca"><span>VERIFIED MINT ADDRESS</span><strong>NOT PUBLISHED</strong><small>Solana · Mint address will be announced here</small></div>
         <div className="token-links">
-          <a href="https://x.com/sarruncash" target="_blank" rel="noreferrer"><span>SARRUN</span><b>Official X</b><ArrowUpRight /></a>
-          <a href="https://explorer.solana.com" target="_blank" rel="noreferrer"><span>SOLANA</span><b>Explorer</b><ArrowUpRight /></a>
+          <a href="https://pump.fun/" target="_blank" rel="noreferrer"><span>PUMP.FUN</span><b>Launchpad</b><ArrowUpRight /></a>
+          <a href="https://fomo.family" target="_blank" rel="noreferrer"><span>FOMO</span><b>Trading app</b><ArrowUpRight /></a>
         </div>
-        <p><Lock /> No Solana mint address is published. Treat every token using the Sarrun name as unofficial until the mint appears here and on @sarruncash.</p>
+        <p><Lock /> These are platform homepages, not SARRUN trading pairs. Token-specific links will only activate after the verified mint is published here and on @sarruncash.</p>
       </div>
     </section>
   )
