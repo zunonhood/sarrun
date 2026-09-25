@@ -1,4 +1,4 @@
-name: Deploy Sarrun to GitHub Pages
+name: Deploy Murven to GitHub Pages
 
 on:
   push:
